@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # VS Code Extensions Installer for Linux/Mac
 # Run: chmod +x install-extensions.sh && ./install-extensions.sh

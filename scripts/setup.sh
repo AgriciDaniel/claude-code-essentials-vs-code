@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Dev Environment Setup Script for Linux/Mac
 # Run: chmod +x setup.sh && ./setup.sh

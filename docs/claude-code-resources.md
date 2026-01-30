@@ -41,7 +41,7 @@ git clone https://github.com/bmadcode/BMAD-METHOD ~/.claude/bmad
 - Full planning: PRD creation, architecture, sprint planning
 - Claude Code native port: `github.com/aj-geddes/claude-code-bmad-skills`
 
-**Repository:** https://github.com/bmad-code-org/BMAD-METHOD
+**Repository:** https://github.com/bmadcode/BMAD-METHOD
 
 ---
 

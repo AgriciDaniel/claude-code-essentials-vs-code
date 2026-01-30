@@ -96,17 +96,6 @@ pip install pandas numpy matplotlib seaborn scikit-learn scipy
 pip install jupyter notebook
 ```
 
-## Useful Apps
-
-```powershell
-winget install 7zip.7zip
-winget install VideoLAN.VLC
-winget install Microsoft.PowerToys
-winget install ShareX.ShareX
-winget install SumatraPDF.SumatraPDF
-winget install Postman.Postman
-```
-
 ## Git Config
 
 ```powershell
