@@ -31,13 +31,13 @@ Perfect for **AI/ML developers**, **web developers**, and **creators** who want 
 Run this in PowerShell to install everything:
 
 ```powershell
-irm https://raw.githubusercontent.com/YOUR_USERNAME/dev-setup-guide/main/scripts/setup.ps1 | iex
+irm https://raw.githubusercontent.com/AgriciDaniel/dev-setup-guide/main/scripts/setup.ps1 | iex
 ```
 
 Or clone and run locally:
 
 ```powershell
-git clone https://github.com/YOUR_USERNAME/dev-setup-guide.git
+git clone https://github.com/AgriciDaniel/dev-setup-guide.git
 cd dev-setup-guide
 .\scripts\setup.ps1
 ```
