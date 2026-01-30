@@ -17,7 +17,7 @@ Perfect for **AI/ML developers**, **web developers**, and **creators** who want 
 
 | Guide | Description |
 |-------|-------------|
-| [Dev Setup Guide](docs/dev-setup-guide.md) | Core tools, package managers, CLI utilities |
+| [Dev Setup Guide](docs/claude-code-essentials-vs-code.md) | Core tools, package managers, CLI utilities |
 | [VS Code Extensions](docs/vscode-extensions-guide.md) | 26 essential extensions + settings |
 | [Claude Code Guide](docs/claude-code-guide.md) | Complete Claude Code features & usage |
 | [Claude Code Resources](docs/claude-code-resources.md) | Ready-to-use skills, commands, agents |
@@ -31,14 +31,14 @@ Perfect for **AI/ML developers**, **web developers**, and **creators** who want 
 Run this in PowerShell to install everything:
 
 ```powershell
-irm https://raw.githubusercontent.com/AgriciDaniel/dev-setup-guide/main/scripts/setup.ps1 | iex
+irm https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.ps1 | iex
 ```
 
 Or clone and run locally:
 
 ```powershell
-git clone https://github.com/AgriciDaniel/dev-setup-guide.git
-cd dev-setup-guide
+git clone https://github.com/AgriciDaniel/claude-code-essentials-vs-code.git
+cd claude-code-essentials-vs-code
 .\scripts\setup.ps1
 ```
 
@@ -80,11 +80,11 @@ npm install -g @anthropic-ai/claude-code
 ## 📁 Repository Structure
 
 ```
-dev-setup-guide/
+claude-code-essentials-vs-code/
 ├── README.md
 ├── LICENSE
 ├── docs/
-│   ├── dev-setup-guide.md          # Core development tools
+│   ├── claude-code-essentials-vs-code.md          # Core development tools
 │   ├── vscode-extensions-guide.md  # VS Code extensions
 │   ├── claude-code-guide.md        # Claude Code complete guide
 │   └── claude-code-resources.md    # Skills, commands, agents
@@ -140,7 +140,7 @@ dev-setup-guide/
 
 ## 📖 Guides Overview
 
-### 1. [Dev Setup Guide](docs/dev-setup-guide.md)
+### 1. [Dev Setup Guide](docs/claude-code-essentials-vs-code.md)
 Complete toolchain installation: Node.js, Python, Git, package managers, CLI tools, containers, AI/ML packages.
 
 ### 2. [VS Code Extensions](docs/vscode-extensions-guide.md)
