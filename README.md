@@ -1,15 +1,17 @@
-# Claude Code and VS Code Essentials
+﻿# Claude Code and VS Code Essentials
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)](https://www.microsoft.com/windows)
-[![VS Code](https://img.shields.io/badge/Editor-VS%20Code-007ACC.svg)](https://code.visualstudio.com/)
-[![Claude Code](https://img.shields.io/badge/AI-Claude%20Code-orange.svg)](https://claude.ai/code)
+[![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows)](https://www.microsoft.com/windows)
+[![macOS](https://img.shields.io/badge/macOS-000000?logo=apple)](https://www.apple.com/macos)
+[![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](https://www.linux.org/)
+[![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-orange)](https://claude.ai/code)
 
 <p align="center">
   <img src="https://pub-528c6a71bd2845e4ba8a1a0265cff149.r2.dev/claude%20code%20vs%20code.jpeg" alt="Claude Code VS Code" width="800"/>
 </p>
 
-A complete guide for setting up a modern development environment on Windows with VS Code, Claude Code, and essential tools.
+A complete guide for setting up a modern development environment with VS Code, Claude Code, and essential tools.
 
 Perfect for **AI/ML developers**, **web developers**, and **creators** who want a professional setup fast.
 
@@ -17,18 +19,26 @@ Perfect for **AI/ML developers**, **web developers**, and **creators** who want 
 
 ## Quick Start
 
-### One-Command Setup
-
-Run this in PowerShell to install everything:
-```
+### Windows (PowerShell)
+```powershell
 irm https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.ps1 | iex
 ```
 
-Or clone and run locally:
+### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.sh | bash
 ```
+
+### Or Clone and Run Locally
+```bash
 git clone https://github.com/AgriciDaniel/claude-code-essentials-vs-code.git
 cd claude-code-essentials-vs-code
+
+# Windows
 .\scripts\setup.ps1
+
+# macOS / Linux
+chmod +x scripts/setup.sh && ./scripts/setup.sh
 ```
 
 ---
@@ -52,6 +62,46 @@ cd claude-code-essentials-vs-code
 
 ---
 
+## Platform-Specific Scripts
+
+| Script | Windows | macOS | Linux |
+|--------|---------|-------|-------|
+| Full setup | `setup.ps1` | `setup.sh` | `setup.sh` |
+| Extensions only | `install-extensions.ps1` | `install-extensions.sh` | `install-extensions.sh` |
+| Claude Code only | `setup-claude-code.ps1` | `setup-claude-code.sh` | `setup-claude-code.sh` |
+
+---
+
+## Prerequisites
+
+### Windows
+- [Node.js](https://nodejs.org/) (LTS)
+- [VS Code](https://code.visualstudio.com/)
+- PowerShell 5.1+ (included in Windows)
+
+### macOS
+```bash
+# Install Homebrew (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js and VS Code
+brew install node
+brew install --cask visual-studio-code
+```
+
+### Linux (Ubuntu/Debian)
+```bash
+# Install Node.js
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Install VS Code
+sudo snap install code --classic
+# Or: https://code.visualstudio.com/docs/setup/linux
+```
+
+---
+
 ## Guides Overview
 
 ### [Dev Setup Guide](docs/dev-setup-guide.md)
@@ -69,8 +119,22 @@ Ready-to-use templates: slash commands, skills, agents, and CLAUDE.md project te
 ---
 
 ## Keep Everything Updated
-```
+
+### Windows
+```powershell
 winget upgrade --all
+npm update -g @anthropic-ai/claude-code
+```
+
+### macOS
+```bash
+brew update && brew upgrade
+npm update -g @anthropic-ai/claude-code
+```
+
+### Linux
+```bash
+sudo apt update && sudo apt upgrade -y
 npm update -g @anthropic-ai/claude-code
 ```
 
@@ -78,13 +142,13 @@ npm update -g @anthropic-ai/claude-code
 
 ## FAQ
 
-**Q: Do I need a paid Claude account?**  
+**Q: Do I need a paid Claude account?**
 A: Yes, Claude Code requires Claude Pro, Max, Teams, or API access.
 
-**Q: Can I use this on Mac or Linux?**  
-A: Guides focus on Windows, but most tools work cross-platform.
+**Q: Which platforms are supported?**
+A: Windows, macOS, and Linux are all fully supported with dedicated scripts.
 
-**Q: Whats the difference between Cline and Claude Code extension?**  
+**Q: Whats the difference between Cline and Claude Code extension?**
 A: Cline is third-party. Claude Code (anthropic.claude-code) is Anthropics official extension.
 
 ---
