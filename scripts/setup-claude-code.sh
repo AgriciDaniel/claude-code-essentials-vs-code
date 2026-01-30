@@ -7,8 +7,23 @@ echo ""
 echo "====== CLAUDE CODE SETUP ======"
 echo ""
 
+# ===== INSTALL CLAUDE CODE =====
+echo "[1/5] Installing Claude Code..."
+
+# Check if npm is installed
+if ! command -v npm &> /dev/null; then
+    echo "  [ERROR] npm is not installed."
+    echo "  Please install Node.js first: https://nodejs.org/"
+    exit 1
+fi
+
+# Install Claude Code globally
+npm install -g @anthropic-ai/claude-code
+echo "  [OK] Claude Code installed"
+
 # ===== CREATE DIRECTORIES =====
-echo "[1/3] Creating directories..."
+echo ""
+echo "[2/5] Creating directories..."
 
 dirs=(
     "$HOME/.claude/commands"
@@ -27,7 +42,7 @@ done
 
 # ===== CREATE EXAMPLE COMMAND =====
 echo ""
-echo "[2/3] Creating example command..."
+echo "[3/5] Creating example command..."
 
 review_cmd="$HOME/.claude/commands/review.md"
 if [ ! -f "$review_cmd" ]; then
@@ -61,7 +76,7 @@ fi
 
 # ===== CREATE EXAMPLE SKILL =====
 echo ""
-echo "[3/3] Creating example skill..."
+echo "[4/5] Creating example skill..."
 
 skill_dir="$HOME/.claude/skills/code-quality"
 skill_file="$skill_dir/SKILL.md"
@@ -110,7 +125,7 @@ fi
 
 # ===== OPTIONAL: MCP SERVERS =====
 echo ""
-echo "[4/4] MCP Servers (Optional)..."
+echo "[5/5] MCP Servers (Optional)..."
 echo -n "Would you like to install recommended MCP servers? (y/n): "
 read mcp
 
@@ -130,6 +145,8 @@ fi
 # ===== VERIFICATION =====
 echo ""
 echo "====== SETUP COMPLETE ======"
+echo ""
+echo "Claude Code version: $(claude --version)"
 echo ""
 echo "Directories:"
 for dir in "${dirs[@]}"; do
