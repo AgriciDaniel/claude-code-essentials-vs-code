@@ -1,4 +1,4 @@
-﻿# Claude Code and VS Code Essentials
+# Claude Code and VS Code Essentials
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)](https://www.microsoft.com/windows)
@@ -20,16 +20,16 @@ Perfect for **AI/ML developers**, **web developers**, and **creators** who want 
 ### One-Command Setup
 
 Run this in PowerShell to install everything:
-`powershell
+```
 irm https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.ps1 | iex
-`
+```
 
 Or clone and run locally:
-`powershell
+```
 git clone https://github.com/AgriciDaniel/claude-code-essentials-vs-code.git
 cd claude-code-essentials-vs-code
 .\scripts\setup.ps1
-`
+```
 
 ---
 
@@ -69,23 +69,23 @@ Ready-to-use templates: slash commands, skills, agents, and CLAUDE.md project te
 ---
 
 ## Keep Everything Updated
-`powershell
+```
 winget upgrade --all
 npm update -g @anthropic-ai/claude-code
-`
+```
 
 ---
 
 ## FAQ
 
-**Q: Do I need a paid Claude account?**
+**Q: Do I need a paid Claude account?**  
 A: Yes, Claude Code requires Claude Pro, Max, Teams, or API access.
 
-**Q: Can I use this on Mac or Linux?**
+**Q: Can I use this on Mac or Linux?**  
 A: Guides focus on Windows, but most tools work cross-platform.
 
-**Q: Whats the difference between Cline and Claude Code extension?**
-A: Cline is third-party. Claude Code anthropic.claude-code is Anthropics official extension.
+**Q: Whats the difference between Cline and Claude Code extension?**  
+A: Cline is third-party. Claude Code (anthropic.claude-code) is Anthropics official extension.
 
 ---
 
