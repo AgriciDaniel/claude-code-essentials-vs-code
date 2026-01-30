@@ -108,6 +108,25 @@ else
     echo "  Exists: $skill_file"
 fi
 
+# ===== OPTIONAL: MCP SERVERS =====
+echo ""
+echo "[4/4] MCP Servers (Optional)..."
+echo -n "Would you like to install recommended MCP servers? (y/n): "
+read mcp
+
+if [ "$mcp" = "y" ] || [ "$mcp" = "Y" ]; then
+    echo "  Installing Memory MCP..."
+    claude mcp add memory -- npx -y @modelcontextprotocol/server-memory 2>/dev/null
+    echo "  Installing Playwright MCP..."
+    claude mcp add playwright -- npx @playwright/mcp@latest 2>/dev/null
+    echo "  [OK] MCP servers installed"
+    echo ""
+    echo "  To add GitHub MCP, run:"
+    echo "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
+else
+    echo "  Skipped MCP installation"
+fi
+
 # ===== VERIFICATION =====
 echo ""
 echo "====== SETUP COMPLETE ======"
@@ -118,6 +137,11 @@ for dir in "${dirs[@]}"; do
         echo "  [OK] $dir"
     fi
 done
+echo ""
+echo "Top resources to explore:"
+echo "  - BMAD Method: npx bmad-method install"
+echo "  - SuperClaude: pipx install superclaude"
+echo "  - See docs/claude-code-resources.md for Top 30 list"
 echo ""
 echo "Next steps:"
 echo "  1. Run 'claude' to start Claude Code"

@@ -62,6 +62,41 @@ chmod +x scripts/setup.sh && ./scripts/setup.sh
 
 ---
 
+## Top Claude Code Resources (2026)
+
+### Workflow Systems
+
+| System | Stars | Description | Install |
+|--------|-------|-------------|---------|
+| **BMAD Method** | 32.9k | 21 agents, 50+ workflows | `npx bmad-method install` |
+| **SuperClaude** | 20.5k | 30 commands, 16 agents | `pipx install superclaude` |
+| **CCPM** | 6.1k | GitHub-native project management | `curl -sSL https://automaze.io/ccpm/install \| bash` |
+
+### MCP Servers (New Syntax)
+
+```bash
+# Official HTTP servers
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+
+# NPX-based servers
+claude mcp add playwright -- npx @playwright/mcp@latest
+claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
+```
+
+### Community Resources
+
+| Resource | Description |
+|----------|-------------|
+| [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | 16.9k stars - Curated everything list |
+| [wshobson/commands](https://github.com/wshobson/commands) | 57 production-ready commands |
+| [claude-flow](https://github.com/ruvnet/claude-flow) | 60+ agents with swarm coordination |
+| [SkillsMP.com](https://skillsmp.com) | 71k+ skills marketplace |
+
+See [Claude Code Resources](docs/claude-code-resources.md) for the complete **Top 30 ranked list** with install commands.
+
+---
+
 ## Platform-Specific Scripts
 
 | Script | Windows | macOS | Linux |

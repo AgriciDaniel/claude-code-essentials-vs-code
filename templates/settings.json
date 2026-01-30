@@ -1,0 +1,54 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(pnpm *)",
+      "Bash(yarn *)",
+      "Bash(git *)",
+      "Bash(node *)",
+      "Bash(python *)",
+      "Bash(pytest *)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(sudo *)",
+      "Bash(curl * | sh)",
+      "Bash(curl * | bash)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": { "tool": "Write", "path": "*.ts" },
+        "command": "npx eslint --fix $TOOL_INPUT_PATH"
+      },
+      {
+        "matcher": { "tool": "Write", "path": "*.tsx" },
+        "command": "npx eslint --fix $TOOL_INPUT_PATH"
+      },
+      {
+        "matcher": { "tool": "Write", "path": "*.js" },
+        "command": "npx eslint --fix $TOOL_INPUT_PATH"
+      },
+      {
+        "matcher": { "tool": "Write", "path": "*.py" },
+        "command": "ruff format $TOOL_INPUT_PATH"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": { "tool": "Bash", "command": "git commit*" },
+        "command": "npm run lint && npm test"
+      }
+    ]
+  },
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

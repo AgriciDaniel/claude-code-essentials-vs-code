@@ -213,13 +213,13 @@ Skills auto-activate when description matches the task.
 
 Built-in agents for parallel/isolated work:
 
-| Agent | Purpose |
-|-------|---------|
-| `Explore` | Read-only codebase exploration |
-| `Plan` | Create implementation plans |
-| `general-purpose` | Full tool access |
+| Agent | Purpose | Context |
+|-------|---------|---------|
+| `Explore` | Read-only codebase exploration | Isolated |
+| `Plan` | Create implementation plans | Isolated |
+| `general-purpose` | Full tool access | Forked |
 
-Use in skills with `context: fork`:
+### Using Subagents in Skills
 
 ```markdown
 ---
@@ -231,26 +231,67 @@ agent: Explore
 Research $ARGUMENTS thoroughly...
 ```
 
+### Custom Agent Definition
+
+Create in `.claude/agents/my-agent.md`:
+
+```markdown
+---
+name: security-auditor
+description: Security-focused code analysis
+tools: Read, Glob, Grep
+context: fork
+---
+Audit code for security vulnerabilities:
+1. SQL injection patterns
+2. XSS vulnerabilities
+3. Authentication flaws
+4. Secrets exposure
+
+Output as security report with severity ratings.
+```
+
+See [Agent Collections](claude-code-resources.md#agent-collections) for 100+ ready-made agents.
+
 ---
 
 ## MCP Servers (External Tools)
 
-```powershell
-# Add MCP server
-claude mcp add github npx @anthropic-ai/mcp-server-github
+```bash
+# Add MCP server (HTTP transport - new syntax)
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/
+
+# Add MCP server (NPX - new syntax)
+claude mcp add playwright -- npx @playwright/mcp@latest
 
 # List servers
 claude mcp list
 
 # Remove server
 claude mcp remove github
+
+# Debug MCP issues
+claude --mcp-debug
 ```
 
-Popular MCP servers:
-- `@anthropic-ai/mcp-server-github` - GitHub integration
-- `@anthropic-ai/mcp-server-filesystem` - File access
-- `@anthropic-ai/mcp-server-puppeteer` - Browser automation
-- `@anthropic-ai/mcp-server-postgres` - Database access
+### Popular MCP Servers
+
+**Official (HTTP Transport):**
+```bash
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
+```
+
+**NPX-Based:**
+```bash
+claude mcp add playwright -- npx @playwright/mcp@latest
+claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem "/path"
+claude mcp add db -- npx -y @bytebase/dbhub --dsn "postgresql://..."
+```
+
+**Registry:** https://registry.modelcontextprotocol.io
 
 ---
 
@@ -271,17 +312,38 @@ Popular MCP servers:
 
 ## Hooks (Automation)
 
-Create `.claude/hooks/pre-commit.md`:
+Hooks are configured in `.claude/settings.json` using the event-based system:
 
-```markdown
----
-trigger: pre-commit
----
-Before committing:
-1. Run linter
-2. Run tests
-3. Check for console.logs
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": { "tool": "Write", "path": "*.ts" },
+        "command": "npx eslint --fix $TOOL_INPUT_PATH"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": { "tool": "Bash", "command": "git commit*" },
+        "command": "npm run lint && npm test"
+      }
+    ]
+  }
+}
 ```
+
+### Hook Events
+
+| Event | When Triggered |
+|-------|----------------|
+| `UserPromptSubmit` | Before prompt sent |
+| `PreToolUse` | Before tool runs |
+| `PostToolUse` | After tool completes |
+| `SessionStart` | Session begins |
+| `Stop` | Claude stops |
+
+See [Claude Code Resources](claude-code-resources.md#hooks-configuration) for more examples.
 
 ---
 

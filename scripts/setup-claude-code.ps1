@@ -67,6 +67,23 @@ Write-Host "  Created: ~/.claude/skills/code-quality/SKILL.md" -ForegroundColor 
 
 Write-Host "  [OK] Example files created" -ForegroundColor Green
 
+# Optional: Install MCP servers
+Write-Host "`n[4/4] MCP Servers (Optional)..." -ForegroundColor Yellow
+Write-Host "Would you like to install recommended MCP servers? (y/n)" -ForegroundColor Cyan
+$mcp = Read-Host
+
+if ($mcp -eq 'y' -or $mcp -eq 'Y') {
+    Write-Host "  Installing Memory MCP..." -ForegroundColor Gray
+    claude mcp add memory -- npx -y @modelcontextprotocol/server-memory 2>$null
+    Write-Host "  Installing Playwright MCP..." -ForegroundColor Gray
+    claude mcp add playwright -- npx @playwright/mcp@latest 2>$null
+    Write-Host "  [OK] MCP servers installed" -ForegroundColor Green
+    Write-Host "`n  To add GitHub MCP, run:" -ForegroundColor Yellow
+    Write-Host "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
+} else {
+    Write-Host "  Skipped MCP installation" -ForegroundColor Gray
+}
+
 # Verify
 Write-Host "`n====== SETUP COMPLETE ======" -ForegroundColor Cyan
 Write-Host "`nClaude Code version: $(claude --version)"
@@ -75,4 +92,8 @@ Write-Host "  ~/.claude/"
 Write-Host "    commands/     <- Your slash commands"
 Write-Host "    skills/       <- Auto-invoked skills"
 Write-Host "    agents/       <- Custom subagents"
+Write-Host "`nTop resources to explore:"
+Write-Host "  - BMAD Method: npx bmad-method install"
+Write-Host "  - SuperClaude: pipx install superclaude"
+Write-Host "  - See docs/claude-code-resources.md for Top 30 list"
 Write-Host "`nRun 'claude' to start!`n"
