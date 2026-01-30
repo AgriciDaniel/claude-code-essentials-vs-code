@@ -104,8 +104,18 @@ Or search "Claude Code" in VS Code Extensions (look for the Anthropic publisher)
 
 ---
 
-## One-Liner (All Essential)
+## Quick Install (All 26 Extensions)
 
+**Option 1: Use the setup script (Recommended)**
+```bash
+# Windows
+.\scripts\install-extensions.ps1
+
+# Linux/Mac
+./scripts/install-extensions.sh
+```
+
+**Option 2: One-liner** (copy the entire line - it's long but works)
 ```powershell
 code --install-extension ms-python.python; code --install-extension dbaeumer.vscode-eslint; code --install-extension esbenp.prettier-vscode; code --install-extension ms-vscode.vscode-typescript-next; code --install-extension bradlc.vscode-tailwindcss; code --install-extension prisma.prisma; code --install-extension formulahendry.auto-rename-tag; code --install-extension christian-kohler.path-intellisense; code --install-extension ritwickdey.LiveServer; code --install-extension eamodio.gitlens; code --install-extension mhutchie.git-graph; code --install-extension anthropic.claude-code; code --install-extension github.copilot; code --install-extension saoudrizwan.claude-dev; code --install-extension ms-azuretools.vscode-docker; code --install-extension ms-vscode-remote.remote-wsl; code --install-extension ms-vscode-remote.remote-ssh; code --install-extension ms-toolsai.jupyter; code --install-extension rangav.vscode-thunder-client; code --install-extension usernamehw.errorlens; code --install-extension PKief.material-icon-theme; code --install-extension aaron-bond.better-comments; code --install-extension streetsidesoftware.code-spell-checker; code --install-extension alefragnani.Bookmarks; code --install-extension wix.vscode-import-cost; code --install-extension formulahendry.code-runner
 ```

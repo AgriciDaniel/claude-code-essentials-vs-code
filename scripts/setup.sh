@@ -164,7 +164,7 @@ if [ "$mcp" = "y" ] || [ "$mcp" = "Y" ]; then
     claude mcp add playwright -- npx @playwright/mcp@latest 2>/dev/null
     echo "  [OK] MCP servers installed"
     echo ""
-    echo "  To add GitHub MCP, run:"
+    echo "  To add GitHub MCP (copy this entire line):"
     echo "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
 else
     echo "  Skipped MCP installation"

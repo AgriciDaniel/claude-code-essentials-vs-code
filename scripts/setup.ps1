@@ -128,8 +128,8 @@ if ($mcp -eq 'y' -or $mcp -eq 'Y') {
     Write-Host "  Installing Playwright MCP..." -ForegroundColor Gray
     claude mcp add playwright -- npx @playwright/mcp@latest 2>$null
     Write-Host "  [OK] MCP servers installed" -ForegroundColor Green
-    Write-Host "`n  To add GitHub MCP, run:" -ForegroundColor Yellow
-    Write-Host "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
+    Write-Host "`n  To add GitHub MCP (copy this entire line):" -ForegroundColor Yellow
+    Write-Host "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/" -ForegroundColor White
 } else {
     Write-Host "  Skipped MCP installation" -ForegroundColor Gray
 }
