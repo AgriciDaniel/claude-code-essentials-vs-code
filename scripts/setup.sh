@@ -22,7 +22,7 @@ fi
 
 # ===== VS CODE EXTENSIONS =====
 echo ""
-echo "[1/4] Installing VS Code Extensions..."
+echo "[1/6] Installing VS Code Extensions..."
 
 extensions=(
     "ms-python.python"
@@ -66,7 +66,7 @@ fi
 
 # ===== CLAUDE CODE =====
 echo ""
-echo "[2/4] Installing/Updating Claude Code..."
+echo "[2/6] Installing/Updating Claude Code..."
 
 # Check if npm is installed
 if command -v npm &> /dev/null; then
@@ -82,11 +82,12 @@ fi
 
 # ===== CLAUDE CODE DIRECTORIES =====
 echo ""
-echo "[3/4] Setting up Claude Code directories..."
+echo "[3/6] Setting up Claude Code directories..."
 
 dirs=(
     "$HOME/.claude/commands"
-    "$HOME/.claude/skills"
+    "$HOME/.claude/skills/code-quality"
+    "$HOME/.claude/skills/security"
     "$HOME/.claude/agents"
 )
 
@@ -100,9 +101,78 @@ for dir in "${dirs[@]}"; do
 done
 echo "  [OK] Claude Code directories ready"
 
+# ===== EXAMPLE FILES =====
+echo ""
+echo "[4/6] Creating example files..."
+
+# Example command
+review_cmd="$HOME/.claude/commands/review.md"
+if [ ! -f "$review_cmd" ]; then
+    cat > "$review_cmd" << 'CMDEOF'
+---
+description: Review code for best practices
+---
+Review the code for:
+1. Security vulnerabilities
+2. Performance issues
+3. Error handling
+4. Code style consistency
+5. Test coverage gaps
+
+Provide specific suggestions with code examples.
+CMDEOF
+    echo "  Created: $review_cmd"
+else
+    echo "  Exists: $review_cmd"
+fi
+
+# Example skill
+skill_file="$HOME/.claude/skills/code-quality/SKILL.md"
+if [ ! -f "$skill_file" ]; then
+    cat > "$skill_file" << 'SKILLEOF'
+---
+name: code-quality
+description: Enforce code quality standards
+---
+When writing or reviewing code:
+
+1. Follow project style guide
+2. Use meaningful variable names
+3. Keep functions under 50 lines
+4. Add error handling
+5. Write self-documenting code
+6. Avoid magic numbers
+7. Use early returns
+SKILLEOF
+    echo "  Created: $skill_file"
+else
+    echo "  Exists: $skill_file"
+fi
+
+echo "  [OK] Example files created"
+
+# ===== MCP SERVERS (OPTIONAL) =====
+echo ""
+echo "[5/6] MCP Servers (Optional)..."
+echo -n "Would you like to install recommended MCP servers? (y/n): "
+read mcp
+
+if [ "$mcp" = "y" ] || [ "$mcp" = "Y" ]; then
+    echo "  Installing Memory MCP..."
+    claude mcp add memory -- npx -y @modelcontextprotocol/server-memory 2>/dev/null
+    echo "  Installing Playwright MCP..."
+    claude mcp add playwright -- npx @playwright/mcp@latest 2>/dev/null
+    echo "  [OK] MCP servers installed"
+    echo ""
+    echo "  To add GitHub MCP, run:"
+    echo "  claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
+else
+    echo "  Skipped MCP installation"
+fi
+
 # ===== VERIFICATION =====
 echo ""
-echo "[4/4] Verification..."
+echo "[6/6] Verification..."
 
 if command -v code &> /dev/null; then
     ext_count=$(code --list-extensions 2>/dev/null | wc -l)
@@ -128,9 +198,20 @@ done
 echo ""
 echo "====== SETUP COMPLETE ======"
 echo ""
+echo "Your Claude Code structure:"
+echo "  ~/.claude/"
+echo "    commands/     <- Your slash commands (try /review)"
+echo "    skills/       <- Auto-invoked skills"
+echo "    agents/       <- Custom subagents"
+echo ""
+echo "Top resources to explore:"
+echo "  - BMAD Method: npx bmad-method install"
+echo "  - SuperClaude: pipx install superclaude"
+echo "  - See docs/claude-code-resources.md for Top 30 list"
+echo ""
 echo "Next steps:"
 echo "  1. Restart your terminal to refresh PATH"
 echo "  2. Run 'claude' to start Claude Code"
-echo "  3. Add custom commands to: ~/.claude/commands/"
+echo "  3. Use '/review' to test your new command"
 echo "  4. Check docs/ folder for guides"
 echo ""
