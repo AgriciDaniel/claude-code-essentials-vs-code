@@ -1,7 +1,5 @@
 # VS Code Extensions Complete Guide
 
-![VS Code Extensions](images/vscode-banner.png)
-
 ## Essential Extensions
 
 ### Install All (Copy & Run)

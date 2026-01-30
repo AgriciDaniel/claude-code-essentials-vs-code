@@ -99,13 +99,24 @@ Claude Code stores learned preferences in memory. Access with `/memory`.
 # Switch models during session
 /model
 
-# Available models:
-# - claude-sonnet-4-20250514 (default)
-# - claude-opus-4-20250514
-# - claude-haiku-4-20250514
+# Available models (Claude 4.5 Series):
+# - claude-sonnet-4-5 (default) - Best coding model
+# - claude-opus-4-5 - Most capable, complex reasoning
+# - claude-haiku-4-5 - Fastest, cost-effective
 ```
 
-### Extended Thinking (Ultrathink)
+**Model Comparison:**
+| Model | Best For | Speed |
+|-------|----------|-------|
+| Sonnet 4.5 | Coding, agents, daily tasks | Fast |
+| Opus 4.5 | Complex reasoning, research | Moderate |
+| Haiku 4.5 | Quick tasks, cost-sensitive | Fastest |
+
+### Extended Thinking (Hybrid Reasoning)
+
+All Claude 4.5 models support hybrid reasoning with two modes:
+- **Instant responses** - Quick answers for simple tasks
+- **Extended thinking** - Deep reasoning for complex problems
 
 Add "ultrathink" anywhere in a skill to enable deep reasoning:
 

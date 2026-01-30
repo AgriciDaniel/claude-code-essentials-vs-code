@@ -43,7 +43,7 @@ chmod +x scripts/setup.sh && ./scripts/setup.sh
 
 ---
 
-## Whats Included
+## What's Included
 
 | Guide | Description |
 |-------|-------------|
@@ -148,8 +148,8 @@ A: Yes, Claude Code requires Claude Pro, Max, Teams, or API access.
 **Q: Which platforms are supported?**
 A: Windows, macOS, and Linux are all fully supported with dedicated scripts.
 
-**Q: Whats the difference between Cline and Claude Code extension?**
-A: Cline is third-party. Claude Code (anthropic.claude-code) is Anthropics official extension.
+**Q: What's the difference between Cline and Claude Code extension?**
+A: Cline is third-party. Claude Code (anthropic.claude-code) is Anthropic's official extension.
 
 ---
 
