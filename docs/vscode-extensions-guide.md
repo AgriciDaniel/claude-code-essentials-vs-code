@@ -1,259 +1,64 @@
-# VS Code Extensions Complete Guide
+# Choose VS Code extensions for your project
 
-## Essential Extensions
+The original video demonstrates 26 selections. They are not 26 requirements for Claude Code. Choose tools for your actual project; the [original extension audit](extension-audit.md) covers every ID, verified update dates, migrations, and limitations. Vendor guidance checked 2026-09-08.
 
-### Install All (Copy & Run)
+## Official Claude Code companion
 
-```powershell
-# Core
-code --install-extension ms-python.python
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension esbenp.prettier-vscode
-code --install-extension ms-vscode.vscode-typescript-next
+In VS Code's Extensions view, find **Claude Code**, published by **Anthropic**, and review the listing. For an intentional CLI installation:
 
-# Web Development
-code --install-extension bradlc.vscode-tailwindcss
-code --install-extension prisma.prisma
-code --install-extension formulahendry.auto-rename-tag
-code --install-extension christian-kohler.path-intellisense
-code --install-extension ritwickdey.LiveServer
-
-# Git
-code --install-extension eamodio.gitlens
-code --install-extension mhutchie.git-graph
-
-# AI Assistants (BOTH recommended!)
-code --install-extension anthropic.claude-code
-code --install-extension github.copilot
-code --install-extension saoudrizwan.claude-dev
-
-# Containers & Remote
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode-remote.remote-ssh
-
-# Python & Data
-code --install-extension ms-toolsai.jupyter
-
-# API Testing
-code --install-extension rangav.vscode-thunder-client
-
-# Productivity
-code --install-extension usernamehw.errorlens
-code --install-extension PKief.material-icon-theme
-code --install-extension aaron-bond.better-comments
-code --install-extension streetsidesoftware.code-spell-checker
-code --install-extension alefragnani.Bookmarks
-code --install-extension wix.vscode-import-cost
-code --install-extension formulahendry.code-runner
-```
-
----
-
-## 🆕 Official Claude Code VS Code Extension (Beta)
-
-Anthropic's **official** Claude Code extension brings the full Claude Code experience directly into VS Code with a native GUI.
-
-### Install
-
-```powershell
+```text
 code --install-extension anthropic.claude-code
 ```
 
-Or search "Claude Code" in VS Code Extensions (look for the Anthropic publisher).
+The extension bundles a private CLI for its panel but does **not** add `claude` to your terminal PATH. For terminal use, follow the standalone installation in the [README](../README.md). Complete interactive sign-in and review permission prompts. Installation does not authenticate your account. See [Anthropic's current VS Code documentation](https://code.claude.com/docs/en/vs-code).
 
-### Features
+The repository wrappers preview your explicit selection before applying it:
 
-| Feature | Description |
-|---------|-------------|
-| **Native Sidebar** | Dedicated Claude Code panel (Spark icon ✨) |
-| **Plan Mode** | Review and edit Claude's plans before accepting |
-| **Auto-Accept Edits** | Automatically apply changes as they're made |
-| **Extended Thinking** | Toggle deep reasoning on/off |
-| **File @-mentions** | Reference files with `@filename` |
-| **Image Support** | Attach images for visual context |
-| **Multiple Sessions** | Run several Claude sessions simultaneously |
-| **MCP Servers** | Use configured MCP servers from CLI |
+```powershell
+# Windows: preview, then apply if this is your chosen extension
+.\scripts\install-extensions.ps1 -Extensions anthropic.claude-code
+.\scripts\install-extensions.ps1 -Extensions anthropic.claude-code -Apply
+```
 
-### Requirements
-
-- VS Code **1.98.0** or higher
-
-### Usage
-
-1. Click the **Spark icon (✨)** in the sidebar
-2. Prompt Claude as you would in terminal
-3. Watch real-time code suggestions
-4. Review and accept edits with inline diffs
-
-### Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Cmd+Option+K` (Mac) | Insert file reference |
-| `Alt+Ctrl+K` (Win/Linux) | Insert file reference |
-
-### Pro Tips
-
-- Drag sidebar wider to see inline diffs
-- Click on diffs to expand full details
-- Use `/mcp` to configure MCP servers
-- Use `/plugin` to manage plugins
-
-> ⚠️ **Security Note**: With auto-edit enabled, Claude can modify IDE config files. Consider using VS Code Restricted Mode for untrusted workspaces.
-
----
-
-## Quick Install (All 26 Extensions)
-
-**Option 1: Use the setup script (Recommended)**
 ```bash
-# Windows
-.\scripts\install-extensions.ps1
-
-# Linux/Mac
-./scripts/install-extensions.sh
+# macOS/Linux: preview, then apply if this is your chosen extension
+bash scripts/install-extensions.sh --extension anthropic.claude-code
+bash scripts/install-extensions.sh --extension anthropic.claude-code --apply
 ```
 
-**Option 2: One-liner** (copy the entire line - it's long but works)
-```powershell
-code --install-extension ms-python.python; code --install-extension dbaeumer.vscode-eslint; code --install-extension esbenp.prettier-vscode; code --install-extension ms-vscode.vscode-typescript-next; code --install-extension bradlc.vscode-tailwindcss; code --install-extension prisma.prisma; code --install-extension formulahendry.auto-rename-tag; code --install-extension christian-kohler.path-intellisense; code --install-extension ritwickdey.LiveServer; code --install-extension eamodio.gitlens; code --install-extension mhutchie.git-graph; code --install-extension anthropic.claude-code; code --install-extension github.copilot; code --install-extension saoudrizwan.claude-dev; code --install-extension ms-azuretools.vscode-docker; code --install-extension ms-vscode-remote.remote-wsl; code --install-extension ms-vscode-remote.remote-ssh; code --install-extension ms-toolsai.jupyter; code --install-extension rangav.vscode-thunder-client; code --install-extension usernamehw.errorlens; code --install-extension PKief.material-icon-theme; code --install-extension aaron-bond.better-comments; code --install-extension streetsidesoftware.code-spell-checker; code --install-extension alefragnani.Bookmarks; code --install-extension wix.vscode-import-cost; code --install-extension formulahendry.code-runner
+These are user installation instructions, not records of installation tests. If `code` is unavailable, use [VS Code CLI setup guidance](https://code.visualstudio.com/docs/configure/command-line).
+
+## Choose additional IDs individually
+
+Review purpose, publisher, dependencies, compatibility, and account/payment requirements before adding an ID. The wrappers accept PowerShell's `-Extensions` array or repeated Bash `--extension` options. There is no install-all recommendation.
+
+| Need | Selection guidance |
+|---|---|
+| Python, notebooks, Tailwind, Prisma | Choose matching project support. Extensions do not replace runtimes, kernels, or project dependencies. |
+| Formatting and linting | Match existing project conventions; preserve user settings and formatting choices. |
+| JavaScript/TypeScript | VS Code includes language support. TypeScript Nightly is an advanced opt-in with stability tradeoffs. |
+| Containers | Current Microsoft tooling is `ms-azuretools.vscode-containers`; the old Docker ID is a wrapper pack. An engine is separate. |
+| Another AI assistant | Copilot and Cline are independent optional products, not Claude Code dependencies. Review current setup, billing, data policies, and permissions separately. |
+| Themes, navigation, diagnostics | Choose by preference; check the audit for older packages and overlap with built-in features. |
+
+The [audit](extension-audit.md) links each publisher and explains Docker/Copilot migrations. Do not automatically remove existing extensions because a refreshed selection omits them.
+
+## Native Windows and WSL
+
+Native Windows uses the Windows editor and Windows CLI installation. WSL uses a Windows VS Code frontend connected to a separate Linux distribution. `ms-vscode-remote.remote-wsl` belongs to that Windows-host workflow; it is not required for native Windows Claude Code, native macOS, or native Linux.
+
+Install and authenticate the standalone CLI in the environment where its terminal runs. Windows and Linux homes/configuration are distinct. Check extension location controls in remote workspaces; do not assume a Windows CLI installation configured WSL. Installing the WSL extension does not provision a distribution. See [Microsoft WSL guidance](https://code.visualstudio.com/docs/remote/wsl).
+
+## Dependencies, trust, and verification
+
+Companion extensions can make the final inventory larger than the number selected. Extensions execute with VS Code's permissions; a named editor profile is not a sandbox. Retain publisher prompts and Workspace Trust, and review dependencies. See [VS Code extension security](https://code.visualstudio.com/docs/configure/extensions/extension-runtime-security).
+
+Installation does not authorize executing project code, connecting accounts, configuring MCP, starting servers, or changing agent approvals. Preserve user settings.
+
+After an intentional installation:
+
+```text
+code --list-extensions --show-versions
 ```
 
----
-
-## What Each Does
-
-### Core Development
-
-| Extension | Purpose |
-|-----------|---------|
-| Python | Python language support, debugging, linting |
-| ESLint | JavaScript/TypeScript linting |
-| Prettier | Auto code formatting |
-| TypeScript Next | Latest TypeScript features |
-
-### Web Development
-
-| Extension | Purpose |
-|-----------|---------|
-| Tailwind CSS | Tailwind IntelliSense & autocomplete |
-| Prisma | Database ORM syntax highlighting |
-| Auto Rename Tag | Auto rename paired HTML tags |
-| Path Intellisense | Filepath autocomplete |
-| Live Server | Local dev server with hot reload |
-
-### Git & Version Control
-
-| Extension | Purpose |
-|-----------|---------|
-| GitLens | Git blame, history, annotations |
-| Git Graph | Visual git branch graph |
-
-### AI Assistants
-
-| Extension | Purpose |
-|-----------|---------|
-| **Claude Code (Official)** | Anthropic's native VS Code extension (Beta) |
-| GitHub Copilot | AI code completion (paid) |
-| Cline (claude-dev) | Claude AI agent in VS Code |
-
-### Containers & Remote
-
-| Extension | Purpose |
-|-----------|---------|
-| Docker | Container management |
-| Remote WSL | Develop in WSL |
-| Remote SSH | Develop on remote servers |
-
-### Data & Notebooks
-
-| Extension | Purpose |
-|-----------|---------|
-| Jupyter | Notebook support for Python/ML |
-
-### API Testing
-
-| Extension | Purpose |
-|-----------|---------|
-| Thunder Client | REST API testing (like Postman) |
-
-### Productivity
-
-| Extension | Purpose |
-|-----------|---------|
-| Error Lens | Show errors inline in code |
-| Material Icons | Better file icons |
-| Better Comments | Colored comment annotations |
-| Code Spell Checker | Catch typos in code/comments |
-| Bookmarks | Mark important lines |
-| Import Cost | Show package import sizes |
-| Code Runner | Run code snippets quickly |
-
----
-
-## Optional (Framework-Specific)
-
-```powershell
-# React/Next.js
-code --install-extension dsznajder.es7-react-js-snippets
-
-# Vue
-code --install-extension Vue.volar
-
-# Svelte
-code --install-extension svelte.svelte-vscode
-
-# GraphQL
-code --install-extension GraphQL.vscode-graphql
-
-# Markdown
-code --install-extension yzhang.markdown-all-in-one
-
-# YAML
-code --install-extension redhat.vscode-yaml
-
-# Database
-code --install-extension mtxr.sqltools
-```
-
----
-
-## Recommended Settings
-
-Add to `settings.json` (`Ctrl+Shift+P` → "Open Settings JSON"):
-
-```json
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "editor.minimap.enabled": false,
-  "editor.wordWrap": "on",
-  "files.autoSave": "onFocusChange",
-  "workbench.iconTheme": "material-icon-theme"
-}
-```
-
----
-
-## Verify Installation
-
-```powershell
-code --list-extensions
-```
-
----
-
-## Update All Extensions
-
-VS Code auto-updates, but force check:
-`Ctrl+Shift+P` → "Extensions: Check for Extension Updates"
-
----
-
-## Total: 26 Extensions
-
-Core (4) + Web (5) + Git (2) + AI (3) + Remote (3) + Data (1) + API (1) + Productivity (7)
+If you supplied custom user-data/extension directories, inspect that same target. A successful exit and inventory entry establish installation, not activation, authentication, or workflow compatibility. Check behavior in a trusted sample project. Review updates through VS Code instead of routinely forcing reinstalls.

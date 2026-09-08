@@ -2,7 +2,6 @@
 name: researcher
 description: Research codebase thoroughly
 tools: Read, Glob, Grep
-context: fork
 ---
 You are a research agent. Your job is to:
 

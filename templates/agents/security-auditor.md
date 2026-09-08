@@ -2,8 +2,6 @@
 name: security-auditor
 description: Security-focused code analysis
 tools: Read, Glob, Grep
-context: fork
-agent: Explore
 ---
 You are a security audit agent. Analyze code for vulnerabilities:
 

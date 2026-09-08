@@ -1,134 +1,56 @@
-# Dev Environment Setup Guide
+# Platform prerequisites and targeted maintenance
 
-## Core Tools
+Checked against primary vendor documentation on 2026-09-08. These are choices,
+not a bulk install checklist. The setup wrapper only installs selected Claude
+and VS Code extension components.
 
-```powershell
-# Node.js (LTS)
-winget install OpenJS.NodeJS.LTS
+| Platform | Preparation | Native Claude route |
+|---|---|---|
+| Windows | PowerShell 5.1+, current supported Windows; install VS Code with its user installer if wanted, then reopen terminal for PATH. Git for Windows is optional in current Claude documentation and supplies Bash. | Official PowerShell installer; no administrator required. WinGet is an alternative, not an additional install. |
+| macOS | Supported macOS; Bash, curl. In VS Code run “Shell Command: Install 'code' command in PATH” if needed; reopen terminal. | Native installer; Homebrew cask is an alternative if Homebrew is already your chosen manager. |
+| Linux | Supported distribution/architecture, Bash and curl. Install VS Code using the vendor's distribution instructions if needed. | Native installer; signed apt/dnf/apk repositories are alternatives, configured separately. |
+| WSL | Run inside the selected Linux distribution. Keep Windows and WSL installations distinct. | Linux installer inside WSL; do not run the Bash wrapper in Git Bash as if it were Linux. |
 
-# Python
-winget install Python.Python.3.12
+Claude's current requirements include macOS 13+, Windows 10 1809+/Server 2019+,
+Ubuntu 20.04+/Debian 10+/Alpine 3.19+, x64 or ARM64 and 4GB+ RAM.
+Alpine/musl additionally needs runtime libraries and ripgrep configuration.
+The wrapper delegates architecture/distribution validation to the vendor
+installer and does not install OS libraries. It rejects other OS families.
+[Claude platform requirements](https://code.claude.com/docs/en/setup).
 
-# Git
-winget install Git.Git
+VS Code has its own, potentially stricter requirements; a supported Claude host
+does not prove VS Code compatibility. Follow the current vendor pages:
+[Windows](https://code.visualstudio.com/docs/setup/windows),
+[macOS](https://code.visualstudio.com/docs/setup/mac),
+[Linux](https://code.visualstudio.com/docs/setup/linux).
+If `code` is missing, fix PATH or supply an explicitly quoted Code command path.
+Do not “fix” an absent command by reinstalling everything.
 
-# PowerShell 7
-winget install Microsoft.PowerShell
+## Alternative Claude managers
 
-# VS Code
-winget install Microsoft.VisualStudioCode
-```
+Choose one installation method. Existing installations are preserved by the
+wrapper. If using WinGet: `winget install --id Anthropic.ClaudeCode --exact`.
+If using Homebrew: `brew install --cask claude-code`. Review each manager's
+prompts and scopes. These are manual alternatives, never run by the wrapper.
 
-## Package Managers
+The current npm package requires **Node.js 22+**, and installs a native binary.
+Only if intentionally choosing npm, use
+`npm install -g @anthropic-ai/claude-code`. Do not use sudo npm or assume a
+global package prefix is writable. Native installation avoids the Node/npm
+dependency. Project-specific JavaScript/Python dependencies belong in that
+project's lockfile or virtual environment, not this setup package.
+[Vendor install methods](https://code.claude.com/docs/en/setup).
 
-```powershell
-# pnpm (faster than npm)
-npm install -g pnpm
+## Update the selected product only
 
-# Yarn
-npm install -g yarn
+- Native install: vendor auto-updates apply; inspect `claude doctor`; use
+  `claude update` for a deliberate manual update.
+- WinGet install: `winget upgrade --id Anthropic.ClaudeCode --exact`.
+- Homebrew install: `brew upgrade claude-code` (or the cask actually installed).
+- npm install: `npm install -g @anthropic-ai/claude-code@latest`.
+- VS Code extensions: review updates in the editor; this helper does not
+  force-update existing extensions.
 
-# Bun (super fast JS runtime)
-winget install Oven-sh.Bun
-
-# uv (ultra-fast Python package manager)
-winget install astral-sh.uv
-```
-
-## Claude Code
-
-```powershell
-# CLI
-npm install -g @anthropic-ai/claude-code
-
-# VS Code Extension
-code --install-extension anthropic.claude-code
-```
-
-## Frameworks
-
-```powershell
-# Next.js
-npm install -g create-next-app
-
-# TypeScript
-npm install -g typescript
-```
-
-## CLI Tools
-
-```powershell
-# GitHub CLI
-winget install GitHub.cli
-
-# fzf (fuzzy finder)
-winget install junegunn.fzf
-
-# ripgrep (fast search)
-winget install BurntSushi.ripgrep.MSVC
-
-# bat (better cat)
-winget install sharkdp.bat
-
-# zoxide (smarter cd)
-winget install ajeetdsouza.zoxide
-
-# lazygit (git UI)
-winget install JesseDuffield.lazygit
-```
-
-## Containers
-
-```powershell
-# Docker Desktop
-winget install Docker.DockerDesktop
-
-# WSL2
-wsl --install
-```
-
-## Python AI/ML Packages
-
-```powershell
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-pip install transformers datasets accelerate huggingface-hub
-pip install pandas numpy matplotlib seaborn scikit-learn scipy
-pip install jupyter notebook
-```
-
-## Git Config
-
-```powershell
-git config --global user.name "Your Name"
-git config --global user.email "your@email.com"
-git config --global init.defaultBranch main
-```
-
-## GitHub SSH Setup (Recommended)
-
-```powershell
-# Generate SSH key
-ssh-keygen -t ed25519 -C "your@email.com"
-
-# Start SSH agent
-Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
-Start-Service ssh-agent
-
-# Add key to agent
-ssh-add $HOME\.ssh\id_ed25519
-
-# Copy public key (add to GitHub → Settings → SSH Keys)
-Get-Content $HOME\.ssh\id_ed25519.pub | clip
-
-# Test connection
-ssh -T git@github.com
-```
-
-## Update Everything
-
-```powershell
-winget upgrade --all
-npm update -g
-pip install --upgrade pip
-wsl --update
-```
+Do not run all-package upgrades, reboot/enable WSL, change global Git identity,
+create SSH keys, install CUDA/ML libraries or change services to follow this
+tutorial. Those are independent development tasks.

@@ -1,19 +1,23 @@
-# Security Policy
+# Security policy
 
-## Reporting a Vulnerability
+Report a suspected vulnerability privately to the maintainer. Use the
+repository's GitHub security reporting flow if enabled; do not disclose secrets
+or exploit details in a public issue.
 
-If you discover a security vulnerability, please report it responsibly:
+## Scope of this helper
 
-1. **Do NOT open a public issue**
-2. Open a [GitHub Security Advisory](https://github.com/AgriciDaniel/claude-code-essentials-vs-code/security/advisories/new) on this repo
-3. Or contact the maintainer directly
+Preview performs no installation. Apply executes the selected vendor installer
+and/or VS Code CLI with the current user's authority. It is not a sandbox.
+Vendor code, extension dependencies and package-manager behavior may change;
+review those sources before installing.
 
-## Supported Versions
+The wrapper does not store credentials, change permission policy, configure
+authentication, install Python dependencies or copy templates to a user profile.
+Do not infer that an extension listing or this source review proves a downloaded
+binary safe. Use [vendor integrity guidance](https://code.claude.com/docs/en/setup)
+and [VS Code security guidance](https://code.visualstudio.com/docs/configure/extensions/extension-runtime-security).
 
-Only the latest version receives security updates.
-
-## Security Practices
-
-- No credentials or API keys are stored in this repository
-- Install scripts write only to user-level directories (`~/.claude/`)
-- Python dependencies install in isolated virtual environments
+Use disposable environments for integration tests, with paired Code storage
+directories and an independently proven boundary for native installers.
+See [validation](docs/validation.md). Keep credentials and machine-specific
+logs out of source packages and issue attachments.

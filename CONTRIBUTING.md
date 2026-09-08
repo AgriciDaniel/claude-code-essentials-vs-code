@@ -1,29 +1,21 @@
-# Contributing to claude-code-essentials-vs-code
+# Contributing
 
-Thanks for your interest in contributing! Here's how to get involved.
+Report ordinary bugs with native OS/shell versions, candidate revision, exact
+sanitized command, exit code and relevant output through
+[GitHub issues](https://github.com/AgriciDaniel/claude-code-essentials-vs-code/issues).
+Remove credentials and personal paths. Follow [SECURITY.md](SECURITY.md) for
+vulnerabilities.
 
-## Reporting Bugs
+For changes, use a branch and inspect the existing script conventions. Keep
+Windows PowerShell 5.1 and macOS Bash 3.2 compatibility explicit. Run
+`python tests/test_package.py` (or python3) without installing real products.
+Use `SETUP_TEST_SHELL` to select a shell. Keep docs/validation.md and the
+candidate receipt honest about actual native platforms and mocked substeps.
 
-Open a [GitHub Issue](https://github.com/AgriciDaniel/claude-code-essentials-vs-code/issues) with:
+Test error propagation, preview/consent, repeated execution, paths with spaces,
+unsupported conditions and partial success. Avoid dependencies that require
+a global install merely to run the test suite. Confirm source ZIP extraction
+is self-contained and excludes caches, secrets and local paths.
 
-- Your OS and VS Code version
-- The full error output
-- The script or step that failed
-
-## Suggesting Features
-
-Use [GitHub Discussions](https://github.com/AgriciDaniel/claude-code-essentials-vs-code/discussions) for feature ideas and questions.
-
-## Pull Requests
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Make your changes
-4. Test on your system before submitting
-5. Submit a PR with a clear description of what changed and why
-
-### Guidelines
-
-- Test scripts on both Unix and Windows when possible
-- Keep guides focused and practical
-- Templates should follow Anthropic's latest skill/agent standards
+A local patch/test result is not upstream publication. Submit a reviewed PR
+only with the repository owner's authorization and include tests and residuals.

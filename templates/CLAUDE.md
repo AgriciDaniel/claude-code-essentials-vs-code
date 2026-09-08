@@ -1,10 +1,14 @@
 # Project: [Your Project Name]
 
+This is an example, not detected project configuration. Replace the stack,
+commands, paths, and conventions with those verified in your repository before
+using this file. Record actual dependency versions from its manifests/lockfiles.
+
 ## Overview
 [Brief description of what this project does]
 
 ## Tech Stack
-- **Frontend**: [e.g., Next.js 14, React, Vue, Svelte]
+- **Frontend**: [framework and verified project version, e.g., Next.js, React, Vue, Svelte]
 - **Backend**: [e.g., Node.js, Python, Go, Rust]
 - **Database**: [e.g., PostgreSQL, MongoDB, SQLite]
 - **Styling**: [e.g., TailwindCSS, CSS Modules, Styled Components]
@@ -58,11 +62,11 @@ NEXT_PUBLIC_APP_URL=
 - `prisma/schema.prisma` - Database schema
 
 ## Git Workflow
-1. Create feature branch from `main`
-2. Make changes with atomic commits
-3. Run tests and linter
-4. Create PR with description
-5. Squash merge after approval
+1. Inspect the repository's current branch and contribution workflow
+2. Make the requested local changes while preserving existing work
+3. Run the relevant tests and linter
+4. Report the diff and validation results for review
+5. Commit, push, create a PR, or merge only when the user explicitly requests it
 
 ## Notes
 - [Add any special instructions]

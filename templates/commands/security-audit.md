@@ -9,7 +9,7 @@ Check for:
 3. CSRF protection gaps
 4. Authentication/authorization flaws
 5. Hardcoded secrets or credentials
-6. Insecure dependencies (run npm audit / pip audit)
+6. Insecure dependencies (use the project's existing audit tool; report missing tooling rather than installing it automatically)
 7. Input validation gaps
 8. Error information exposure
 9. Insecure file operations

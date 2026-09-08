@@ -1,213 +1,118 @@
-﻿# Claude Code and VS Code Essentials
+# Claude Code and VS Code Essentials
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows)](https://www.microsoft.com/windows)
-[![macOS](https://img.shields.io/badge/macOS-000000?logo=apple)](https://www.apple.com/macos)
-[![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](https://www.linux.org/)
-[![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-orange)](https://claude.ai/code)
+A small, opt-in setup helper for Claude Code and selected VS Code extensions.
+The January 2026 tutorial's “26 extensions in one command” is historical: this
+refresh installs **nothing by default**. Review your choices before applying them.
 
-<p align="center">
-  <img src="https://pub-528c6a71bd2845e4ba8a1a0265cff149.r2.dev/claude%20code%20vs%20code.jpeg" alt="Claude Code VS Code" width="800"/>
-</p>
+## Quick start from reviewed source
 
-A complete guide for setting up a modern development environment with VS Code, Claude Code, and essential tools.
+Download and extract the source ZIP, or clone this repository. Open a terminal
+in the extracted repository. Inspect the scripts; do not pipe a moving GitHub
+branch directly into a shell. No administrator shell is required by this wrapper.
 
-Perfect for **AI/ML developers**, **web developers**, and **creators** who want a professional setup fast.
+On Windows, downloaded files or organizational execution policy can block a
+PowerShell script before it starts. Inspect the file and its origin first;
+if appropriate, unblock only the reviewed files through Properties or
+`Unblock-File`. Follow your organization's policy. The helper never changes
+execution policy or silently bypasses it.
 
----
+Windows PowerShell 5.1+:
 
-## Quick Start
-
-### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.ps1 | iex
+# Preview only
+.\scripts\setup.ps1 -InstallClaude -Extensions anthropic.claude-code
+# Execute exactly those choices
+.\scripts\setup.ps1 -InstallClaude -Extensions anthropic.claude-code -Apply
 ```
 
-### macOS / Linux (Bash)
-```bash
-curl -fsSL https://raw.githubusercontent.com/AgriciDaniel/claude-code-essentials-vs-code/main/scripts/setup.sh | bash
-```
-
-### Or Clone and Run Locally
-```bash
-git clone https://github.com/AgriciDaniel/claude-code-essentials-vs-code.git
-cd claude-code-essentials-vs-code
-
-# Windows
-.\scripts\setup.ps1
-
-# macOS / Linux
-chmod +x scripts/setup.sh && ./scripts/setup.sh
-```
-
----
-
-## What's Included
-
-| Guide | Description |
-|-------|-------------|
-| [Dev Setup Guide](docs/dev-setup-guide.md) | Core tools, package managers, CLI utilities |
-| [VS Code Extensions](docs/vscode-extensions-guide.md) | 26 essential extensions + settings |
-| [Claude Code Guide](docs/claude-code-guide.md) | Complete Claude Code features and usage |
-| [Claude Code Resources](docs/claude-code-resources.md) | Ready-to-use skills, commands, agents |
-
----
-
-## What Gets Installed
-
-- **26 VS Code Extensions** - Python, ESLint, Prettier, Tailwind, GitLens, Claude Code Official, Copilot, and more
-- **Claude Code CLI** - Full installation with directory structure
-- **Example Commands and Skills** - Ready-to-use templates
-
----
-
-## Top Claude Code Resources (2026)
-
-### Workflow Systems
-
-| System | Stars | Description | Install |
-|--------|-------|-------------|---------|
-| **BMAD Method** | 32.9k | 21 agents, 50+ workflows | `npx bmad-method install` |
-| **SuperClaude** | 20.5k | 30 commands, 16 agents | `pipx install superclaude` |
-| **CCPM** | 6.1k | GitHub-native project management | `curl -sSL https://automaze.io/ccpm/install \| bash` |
-
-### MCP Servers (New Syntax)
+macOS / Linux / WSL, Bash 3.2+:
 
 ```bash
-# Official HTTP servers
-claude mcp add --transport http github https://api.githubcopilot.com/mcp/
-claude mcp add --transport http notion https://mcp.notion.com/mcp
-
-# NPX-based servers
-claude mcp add playwright -- npx @playwright/mcp@latest
-claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
+bash scripts/setup.sh --install-claude --extension anthropic.claude-code
+bash scripts/setup.sh --install-claude --extension anthropic.claude-code --apply
 ```
 
-### Community Resources
+An existing Claude executable is checked and preserved; no migration, version
+change or channel change is attempted. A missing CLI uses Anthropic's native
+HTTPS installer, with `stable` as this wrapper's default. Applying that choice
+executes vendor code as your user and accepts its installation behavior, including
+native auto-updates. The downloaded installer is temporary. HTTPS delivery and
+a printed Windows hash are not an independent signature audit. Review the
+[vendor installer and integrity instructions](https://code.claude.com/docs/en/setup)
+if you need stricter provenance.
 
-| Resource | Description |
-|----------|-------------|
-| [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | 16.9k stars - Curated everything list |
-| [wshobson/commands](https://github.com/wshobson/commands) | 57 production-ready commands |
-| [claude-flow](https://github.com/ruvnet/claude-flow) | 60+ agents with swarm coordination |
-| [SkillsMP.com](https://skillsmp.com) | 71k+ skills marketplace |
+The official VS Code extension works independently; the CLI is optional for
+extension-only use. [Anthropic VS Code guide](https://code.claude.com/docs/en/vs-code).
 
-See [Claude Code Resources](docs/claude-code-resources.md) for the complete **Top 30 ranked list** with install commands.
+## Choose only what you use
 
----
+- CLI only: omit the extension option.
+- Extensions only: omit the Claude option, or use `install-extensions.ps1/.sh`.
+- Extra extensions: PowerShell `-Extensions anthropic.claude-code,dbaeumer.vscode-eslint`;
+  Bash repeat `--extension` for each ID.
+- Install channel/version for a **missing** CLI: `-ClaudeVersion latest` /
+  `--claude-version latest`, or a numeric `X.Y.Z`. It is not a permanent
+  update lock and does not change an existing install.
+- Nonstandard Code path: `-CodeCommand 'path with spaces/code.cmd'` /
+  `--code-command '/path with spaces/code'`. Quote paths.
+- Separate VS Code storage: pass **both** `-CodeUserDataDir` and
+  `-CodeExtensionsDir`, or `--code-user-data-dir` and `--code-extensions-dir`.
+  The same directories are used for listing, installation and verification.
+  Without them, the selected CLI's default profile is targeted.
 
-## Platform-Specific Scripts
+Extension IDs are validated as `publisher.extension`; URLs, VSIX paths, flags
+and version suffixes are rejected. There is no “all” preset. Selected extension
+dependencies/packs may add other extensions; review that publisher's listing.
+Existing extensions are skipped without `--force`. See the
+[26-extension audit](docs/extension-audit.md) and [selection guide](docs/vscode-extensions-guide.md).
 
-| Script | Windows | macOS | Linux |
-|--------|---------|-------|-------|
-| Full setup | `setup.ps1` | `setup.sh` | `setup.sh` |
-| Extensions only | `install-extensions.ps1` | `install-extensions.sh` | `install-extensions.sh` |
-| Claude Code only | `setup-claude-code.ps1` | `setup-claude-code.sh` | `setup-claude-code.sh` |
+## Prerequisites and behavior
 
----
+[Platform setup](docs/dev-setup-guide.md) covers Windows, macOS and Linux PATH,
+WSL, vendor prerequisites and targeted updates. Native Claude does not require
+Node.js. The optional npm route currently requires Node.js 22+ and is documented
+separately; this wrapper does not install npm, Node, Git, VS Code, WSL or runtimes.
 
-## Prerequisites
+Preview does not execute installers or Code/Claude commands. `-Apply/--apply`
+is explicit noninteractive consent to the listed components. No stdin prompt can
+swallow a piped script. VS Code or the vendor installer may still require human
+action or fail due to policy/network restrictions; the wrapper never approves
+additional dialogs. Cancel before apply to make no changes. Ctrl+C during apply
+can leave a partial install; inspect it before rerunning.
 
-### Windows
-- [Node.js](https://nodejs.org/) (LTS)
-- [VS Code](https://code.visualstudio.com/)
-- PowerShell 5.1+ (included in Windows)
+Selected VS Code prerequisites are checked before installing Claude. Failures
+stop with a nonzero exit and visible diagnostics. An extension must appear in
+the post-install list; Claude must return a recognizable version. A successful
+version check proves executable availability, **not authentication**. Prior
+successful steps remain installed after later failures; there is no automatic
+rollback or retry. Repeating a successful run skips existing components.
+Upgrades use the original package manager, separately.
 
-### macOS
-```bash
-# Install Homebrew (if not installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+## First use and customization
 
-# Install Node.js and VS Code
-brew install node
-brew install --cask visual-studio-code
-```
+Start `claude` in a project and follow its sign-in flow, or sign in through the
+extension. A supported paid subscription, Console billing, or supported provider
+access is required; these have different billing paths. Never paste keys into
+templates. [Authentication](https://code.claude.com/docs/en/authentication).
 
-### Linux (Ubuntu/Debian)
-```bash
-# Install Node.js
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt install -y nodejs
+Read the [Claude guide](docs/claude-code-guide.md) for project settings, reviewed
+templates, optional skills/subagents/MCP and permission handling. Nothing copies
+to `~/.claude`, changes a shell profile, bypasses permissions, adds MCP servers,
+or installs third-party workflow frameworks automatically.
 
-# Install VS Code (Debian/Ubuntu/Mint — download .deb from https://code.visualstudio.com)
-sudo apt install -y ./code_*.deb
-# Snap alternative (not available on Linux Mint): sudo snap install code --classic
-```
+## Tests and review
 
----
-
-## Guides Overview
-
-### [Dev Setup Guide](docs/dev-setup-guide.md)
-Complete toolchain: Node.js, Python, Git, package managers, CLI tools, containers, AI/ML packages.
-
-### [VS Code Extensions](docs/vscode-extensions-guide.md)
-26 curated extensions including the official Claude Code extension, with one-liner install.
-
-### [Claude Code Guide](docs/claude-code-guide.md)
-Everything about Claude Code: slash commands, skills, subagents, MCP servers, plugins, hooks.
-
-### [Claude Code Resources](docs/claude-code-resources.md)
-Ready-to-use templates: slash commands, skills, agents, and CLAUDE.md project template.
-
----
-
-## Keep Everything Updated
-
-### Windows
 ```powershell
-winget upgrade --all
-npm update -g @anthropic-ai/claude-code
+python tests/test_package.py
 ```
 
-### macOS
-```bash
-brew update && brew upgrade
-npm update -g @anthropic-ai/claude-code
-```
+Use `python3` on Unix if that is your Python command (Python 3.9+). Tests launch
+real script entrypoints with process-local fakes and disposable storage; they
+never install the real products. [Test matrix and integration procedure](docs/validation.md)
+distinguish script execution from real installer proof. See [CHANGELOG](CHANGELOG.md)
+and [audit findings](docs/refresh-audit.md).
 
-### Linux
-```bash
-sudo apt update && sudo apt upgrade -y
-npm update -g @anthropic-ai/claude-code
-```
-
----
-
-## FAQ
-
-**Q: Do I need a paid Claude account?**
-A: Yes, Claude Code requires Claude Pro, Max, Teams, or API access.
-
-**Q: Which platforms are supported?**
-A: Windows, macOS, and Linux are all fully supported with dedicated scripts.
-
-**Q: What's the difference between Cline and Claude Code extension?**
-A: Cline is third-party. Claude Code (anthropic.claude-code) is Anthropic's official extension.
-
----
-
-## License
-
-MIT License - Use freely for personal and commercial projects.
-
----
-
-## Support
-
-If this helped you, consider starring this repo, forking and customizing, or sharing with other developers.
-
----
-
-Made with love for the developer community
----
-
-## Author
-
-Built by [Agrici Daniel](https://agricidaniel.com/about) - AI Workflow Architect.
-
-- [Blog](https://agricidaniel.com/blog) - Deep dives on AI marketing automation
-- [AI Marketing Hub](https://www.skool.com/ai-marketing-hub) - Free community, 2,800+ members
-- [YouTube](https://www.youtube.com/@AgriciDaniel) - Tutorials and demos
-- [All open-source tools](https://github.com/AgriciDaniel)
+MIT licensed. Built by [Agrici Daniel](https://agricidaniel.com/about).
+[YouTube](https://www.youtube.com/@AgriciDaniel) ·
+[Community](https://www.skool.com/ai-marketing-hub) ·
+[Open-source projects](https://github.com/AgriciDaniel).

@@ -10,6 +10,9 @@ Follow these steps:
 4. Implement the necessary fix
 5. Write tests to verify the fix
 6. Run linter and fix any issues
-7. Commit with message: "fix: resolve #$ARGUMENTS - [brief description]"
+7. Summarize the local diff, tests, and any remaining limitations for review
+
+Do not commit, push, or change the issue's status unless the user explicitly
+requests that action.
 
 Be thorough and ensure the fix doesn't break existing functionality.

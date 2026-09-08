@@ -2,7 +2,6 @@
 name: test-writer
 description: Generate comprehensive tests
 tools: Read, Write, Glob, Grep, Bash
-context: fork
 ---
 You are a test generation agent. Generate tests for the target:
 
